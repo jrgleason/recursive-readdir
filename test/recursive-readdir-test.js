@@ -24,7 +24,7 @@ describe("readdir", function() {
 
     readdir(p.join(__dirname, "testdir"), function(err, list) {
       assert.ifError(err);
-      assert.deepEqual(list.sort(), expectedFiles.sort());
+      assert.deepEqual(list.map((item)=>{ return item.path }).sort(), expectedFiles.sort());
       done();
     });
   });
@@ -40,7 +40,7 @@ describe("readdir", function() {
       list
     ) {
       assert.ifError(err);
-      list.forEach(function(file) {
+      list.map((item)=>{ return item.path }).forEach(function(file) {
         assert.equal(
           notExpectedFiles.indexOf(file),
           -1,
@@ -62,7 +62,7 @@ describe("readdir", function() {
       list
     ) {
       assert.ifError(err);
-      list.forEach(function(file) {
+      list.map((item)=>{ return item.path }).forEach(function(file) {
         assert.equal(
           notExpectedFiles.indexOf(file),
           -1,
@@ -85,7 +85,7 @@ describe("readdir", function() {
       ["linkeddir", "linkedfile.wmf"],
       function(err, list) {
         assert.ifError(err);
-        list.forEach(function(file) {
+        list.map((item)=>{ return item.path }).forEach(function(file) {
           assert.equal(
             notExpectedFiles.indexOf(file),
             -1,
@@ -108,7 +108,7 @@ describe("readdir", function() {
       list
     ) {
       assert.ifError(err);
-      list.forEach(function(file) {
+      list.map((item)=>{ return item.path }).forEach(function(file) {
         assert.equal(
           notExpectedFiles.indexOf(file),
           -1,
@@ -336,7 +336,7 @@ describe("readdir", function() {
     readdir(p.join(__dirname, "testdirBeta"), ["!*.txt"], function(err, list) {
       assert.ifError(err);
       assert.deepEqual(
-        list.sort(),
+        list.map((item)=>{ return item.path }).sort(),
         expectedFiles,
         "Failed to find expected files."
       );
@@ -353,7 +353,7 @@ describe("readdir", function() {
     readdir(p.join(__dirname, "testsymlinks", "testdir"), function(err, list) {
       assert.ifError(err);
       assert.deepEqual(
-        list.sort(),
+        list.map((item)=>{ return item.path }).sort(),
         expectedFiles,
         "Failed to find expected files."
       );
@@ -376,7 +376,7 @@ describe("readdir", function() {
 
       readdir(p.join(__dirname, "testdir"))
         .then(function(list) {
-          assert.deepEqual(list.sort(), expectedFiles.sort());
+          assert.deepEqual(list.map((item)=>{ return item.path }).sort(), expectedFiles.sort());
           done();
         })
         .catch(done);
@@ -392,7 +392,7 @@ describe("readdir", function() {
 
       readdir(p.join(__dirname, "testdir"), ["*.txt"])
         .then(function(list) {
-          assert.deepEqual(list.sort(), expectedFiles.sort());
+          assert.deepEqual(list.map((item)=>{ return item.path }).sort(), expectedFiles.sort());
           done();
         })
         .catch(done);
